@@ -319,6 +319,8 @@ class ConcurrentRotatingFileHandler(BaseRotatingHandler):
         Override from parent class to handle file locking for the duration of rollover and write.
         This also does the formatting *before* locks are obtained, in case the format itself does
         logging calls from within. Rollover also occurs while the lock is held.
+
+        在消费每一条日志时加锁, 并判断是否要滚动日志
         """
         # noinspection PyBroadException
         try:
